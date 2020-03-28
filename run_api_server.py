@@ -1,27 +1,6 @@
 # This is a differentially private contagion score server 
 
-from utils import load_scorefield
-import redis
-from server import handle_api_request
-
-redis = redis.StrictRedis()
-
-""" Requests are POSTed as json in the form:
-```
-{
-    "geo" : {<geo_data},
-    "private_id_data" : {<id_data>},
-}
-```
-
-The geo_data object currently only supports lat/lon pairs ie ```
-```
-{
-  "lat" : <query_lattitude>,
-  "lon" : <query_longitude>
-}
-```
-"""
+from handlers import handle_api_request
 from flask import Flask, request, Response
 import json
 
