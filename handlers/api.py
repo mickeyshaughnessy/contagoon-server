@@ -1,4 +1,4 @@
-import redis, time
+import redis, time, json
 from datetime import date
 
 redis = redis.StrictRedis()
@@ -15,7 +15,7 @@ redis = redis.StrictRedis()
 """
 
 def handle_api_request(req):
-    _type = req.get("type")
+    _type = json.loads(req).get("type")
     day = date.today()
     resp = {}
     # do actual logic here
