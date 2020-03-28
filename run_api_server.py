@@ -1,6 +1,6 @@
 # This is a differentially private contagion score server 
 
-from handlers import handle_api_request
+from handlers.api import handle_api_request
 from flask import Flask, request, Response
 import json
 
