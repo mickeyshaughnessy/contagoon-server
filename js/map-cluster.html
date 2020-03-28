@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html style="height:100%;margin:0;padding:0;">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Marker Clustering</title>
+  </head>
+  <body style="height:100%;margin:0;padding:0;">
+  <div id="map" style="height:100%;"></div>
+    <script>
+      function initMap() {
+          var map = new google.maps.Map(document.getElementById('map'), { zoom: 5, center: {lat: 38.6270, lng: -98.1994}, mapTypeControlOptions: { mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'styled_map']} });
+          var script = document.createElement('script');
+          script.src = 'hospitals-full.jsonp';
+          document.getElementsByTagName('head')[0].appendChild(script);
+          //var market_icon = new google.maps.MarkerImage("icon.png", null, null, null, new google.maps.Size(40,52)); // Create a variable for our marker image.
+          window.eqfeed_callback = function(results) {
+               var markers = [];
+               for (var i = 0; i < results.features.length; i++) {
+                    var latLng = new google.maps.LatLng(results.features[i].geometry.y,results.features[i].geometry.x);
+                    var marker = new google.maps.Marker({ 
+                         position: latLng, 
+                         map: map,
+                         mapTypeId: 'terrain',
+                         styles: [
+                              {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+                              {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                              {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+                              {
+                              featureType: 'administrative.locality',
+                              elementType: 'labels.text.fill',
+                              stylers: [{color: '#d59563'}]
+                              },
+                              {
+                              featureType: 'poi',
+                              elementType: 'labels.text.fill',
+                              stylers: [{color: '#d59563'}]
+                              },
+                              {
+                              featureType: 'poi.park',
+                              elementType: 'geometry',
+                              stylers: [{color: '#263c3f'}]
+                              },
+                              {
+                              featureType: 'poi.park',
+                              elementType: 'labels.text.fill',
+                              stylers: [{color: '#6b9a76'}]
+                              },
+                              {
+                              featureType: 'road',
+                              elementType: 'geometry',
+                              stylers: [{color: '#38414e'}]
+                              },
+                              {
+                              featureType: 'road',
+                              elementType: 'geometry.stroke',
+                              stylers: [{color: '#212a37'}]
+                              },
+                              {
+                              featureType: 'road',
+                              elementType: 'labels.text.fill',
+                              stylers: [{color: '#9ca5b3'}]
+                              },
+                              {
+                              featureType: 'road.highway',
+                              elementType: 'geometry',
+                              stylers: [{color: '#746855'}]
+                              },
+                              {
+                              featureType: 'road.highway',
+                              elementType: 'geometry.stroke',
+                              stylers: [{color: '#1f2835'}]
+                              },
+                              {
+                              featureType: 'road.highway',
+                              elementType: 'labels.text.fill',
+                              stylers: [{color: '#f3d19c'}]
+                              },
+                              {
+                              featureType: 'transit',
+                              elementType: 'geometry',
+                              stylers: [{color: '#2f3948'}]
+                              },
+                              {
+                              featureType: 'transit.station',
+                              elementType: 'labels.text.fill',
+                              stylers: [{color: '#d59563'}]
+                              },
+                              {
+                              featureType: 'water',
+                              elementType: 'geometry',
+                              stylers: [{color: '#17263c'}]
+                              },
+                              {
+                              featureType: 'water',
+                              elementType: 'labels.text.fill',
+                              stylers: [{color: '#515c6d'}]
+                              },
+                              {
+                              featureType: 'water',
+                              elementType: 'labels.text.stroke',
+                              stylers: [{color: '#17263c'}]
+                              }
+                              ]
+                    });
+                    markers.push(marker);
+               }
+               var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+          } 
+      }
+    </script>
+    <script src="markerclustererplus.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgOr6M7317HkWO9LFCi5_z2Xh_eNTn4zE&callback=initMap">
+    </script>
+  </body>
+</html>
