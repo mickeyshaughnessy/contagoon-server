@@ -41,15 +41,21 @@ map.addLayer(
 'maxzoom': 9,
 'paint': {
 // Increase the heatmap weight based on frequency and property magnitude
-'heatmap-weight': [
-'interpolate',
-['linear'],
-['get', 'score'],
-0,
-0,
-1,
-1
-],
+'heatmap-weight': {
+  property: 'score',
+      type: 'exponential',
+      stops: [
+        [0, 0],
+        [1, 1]
+        ]
+//'interpolate',
+//['linear'],
+//['get', 'score'],
+//0,
+//0,
+//1,
+//1
+},
 // Increase the heatmap color weight weight by zoom level
 // heatmap-intensity is a multiplier on top of heatmap-weight
 'heatmap-intensity': [
