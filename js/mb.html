@@ -29,7 +29,7 @@ map.on('load', function() {
 map.addSource('earthquakes', {
 'type': 'geojson',
 'data':
-"https://mickeyshaughnessy.github.io/contagoon-server/js/out.geojson"
+'https://mickeyshaughnessy.github.io/contagoon-server/js/out.geojson'
 //'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson'
 });
  
@@ -125,9 +125,9 @@ map.addLayer(
 ['linear'],
 ['zoom'],
 7,
-['interpolate', ['linear'], ['get', 'mag'], 1, 1, 6, 4],
+['interpolate', ['linear'], ['get', 'score'], 1, 1, 6, 4],
 16,
-['interpolate', ['linear'], ['get', 'mag'], 1, 5, 6, 50]
+['interpolate', ['linear'], ['get', 'score'], 1, 5, 6, 50]
 ],
 // Color circle by earthquake magnitude
 'circle-color': [
